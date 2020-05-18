@@ -13,7 +13,7 @@ module.exports = (mongoose) => {
     object.id = _id;
     return object;
   });
-
+// create model with the schema
   const Tracker = mongoose.model("tracker", schema);
   return Tracker;
 };

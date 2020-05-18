@@ -4,7 +4,6 @@ const Tracker = db.trackers;
 // Create and Save a new Tracker
 exports.create = (req, res) => {
   // Validate request
-
   if (!req.body.description) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
@@ -42,12 +41,13 @@ exports.create = (req, res) => {
 // Retrieve all trackers from the database.
 exports.findAll = (req, res) => {
   const description = req.query.description;
+  // parse the string to integer for both page and limit
   const page = parseInt(req.query.page);
   const limit = parseInt(req.query.limit);
 
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
-
+// search condition for the description input field
   var condition = description
     ? { description: { $regex: new RegExp(description), $options: "i" } }
     : {};
